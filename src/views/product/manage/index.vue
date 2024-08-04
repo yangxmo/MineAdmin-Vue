@@ -185,7 +185,8 @@ const columns = reactive([
     commonRules: {
       required: true,
       message: "请输入分组ID"
-    }
+    },
+    dict: { url: 'product/category/list', props: { label: 'title', value: 'category_no' } }
   },
   {
     title: "所属品牌",
@@ -195,7 +196,8 @@ const columns = reactive([
     commonRules: {
       required: true,
       message: "请输入品牌ID"
-    }
+    },
+    dict: { url: 'product/brand/list', props: { label: 'name', value: 'brand_no' } }
   },
   {
     title: "商品状态",
