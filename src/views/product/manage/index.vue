@@ -133,6 +133,19 @@ const columns = reactive([
     width: 150,
   },
   {
+    title: "商品首图",
+    dataIndex: "image",
+    formType: "upload",
+    commonRules: {
+      required: true,
+      message: "请输入商品首图"
+    },
+    type: "image",
+    multiple: false,
+    onlyData: true,
+    onlyUrl: true
+  },
+  {
     title: "商品名称",
     dataIndex: "name",
     formType: "input",
@@ -179,9 +192,11 @@ const columns = reactive([
   },
   {
     title: "商品分组",
-    dataIndex: "category_id",
+    dataIndex: "category_no",
     formType: "select",
     search: true,
+    hide: true,
+    select: false,
     commonRules: {
       required: true,
       message: "请输入分组ID"
@@ -189,15 +204,33 @@ const columns = reactive([
     dict: { url: 'product/category/list', props: { label: 'title', value: 'category_no' } }
   },
   {
+    title: "商品分组",
+    dataIndex: "category.title",
+    formType: "select",
+    search: false,
+    addDisplay: false,
+    editDisplay: false
+  },
+  {
     title: "所属品牌",
-    dataIndex: "brand_id",
+    dataIndex: "brand_no",
     formType: "select",
     search: true,
+    hide: true,
+    select: false,
     commonRules: {
       required: true,
       message: "请输入品牌ID"
     },
     dict: { url: 'product/brand/list', props: { label: 'name', value: 'brand_no' } }
+  },
+  {
+    title: "所属品牌",
+    dataIndex: "brand.name",
+    formType: "select",
+    search: false,
+    addDisplay: false,
+    editDisplay: false
   },
   {
     title: "商品状态",
@@ -228,19 +261,6 @@ const columns = reactive([
     }
   },
   {
-    title: "商品首图",
-    dataIndex: "image",
-    formType: "upload",
-    commonRules: {
-      required: true,
-      message: "请输入商品首图"
-    },
-    type: "image",
-    multiple: false,
-    onlyData: true,
-    onlyUrl: true
-  },
-  {
     title: "轮播图片",
     dataIndex: "images",
     formType: "upload",
@@ -263,30 +283,6 @@ const columns = reactive([
     onlyData: true,
   },
   {
-    title: "商品多规格",
-    dataIndex: "specifications",
-    formType: "children-form",
-    customClass: ['mt-3', 'mb-5'],
-    formList: [
-      {
-        title: '属性名',
-        dataIndex: 'name',
-        formType: 'input',
-        rules: [{ required: true, message: '请输入属性名称' }],
-      },
-      {
-        title: '属性值',
-        dataIndex: 'value',
-        formType: 'input',
-        rules: [{ required: true, message: '请输入属性值' }],
-      },
-    ],
-    button: {
-      text: '生成SKU',
-      action: 'generateSku'
-    }
-  },
-  {
     title: "商品详情",
     dataIndex: "description",
     formType: "editor",
@@ -295,16 +291,6 @@ const columns = reactive([
       required: true,
       message: "请输入商品详情"
     }
-  },
-  {
-    title: "上架时间",
-    dataIndex: "on_sale_at",
-    formType: "range",
-    search: true,
-    addDisplay: false,
-    editDisplay: false,
-    showTime: true,
-    width: 200,
   },
   {
     title: "创建时间",
